@@ -6,6 +6,7 @@
     <string name="hint_text_add">Nombre del producto</string>
     <string name="title_Spinner">Seleccionar su categoria</string>
     <string name="label_btn_add"> Guardar</string>
-
+    <string name="menu_option1">Modificar</string>
+    <string name="menu_option2">Eliminar</string>
 
 </resources>
