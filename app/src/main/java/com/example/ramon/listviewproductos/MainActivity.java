@@ -82,11 +82,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+     if (requestCode==777) {
+         lproductos.add(data.getStringExtra("nombre"));
+         lcategorias.add(data.getStringExtra("categoria"));
 
-   lproductos.add(data.getStringExtra("nombre"));
-   lcategorias.add(data.getStringExtra("categoria"));
-    actualizarTabla();
 
+     }
+
+     else  if (requestCode==8888)
+     {
+     int pos = data.getIntExtra("pos" ,0);
+
+          if (pos>=0)
+          {
+              lproductos.set(pos,data.getStringExtra("nombre"));
+              lcategorias.set(pos,data.getStringExtra("categoria"));
+
+          }
+
+     }
+actualizarTabla();
     }
 
 
@@ -123,8 +138,13 @@ getMenuInflater().inflate(R.menu.menu_contextual,menu);
 
         {
             case R.id.contextual1:
-                Toast.makeText(this,"Se modifico",Toast.LENGTH_LONG).show();
+               // Toast.makeText(this,"Se modifico",Toast.LENGTH_LONG).show();
+                Intent f= new Intent(this, AgregarActividad.class);
 
+                f.putExtra("nombre",lproductos.get(info.position));
+                f.putExtra("categoria",lproductos.get(info.position));
+                f.putExtra("position",info.position);
+                startActivityForResult(f,888);
                 break;
 
             case R.id.contextual2:
@@ -140,10 +160,8 @@ getMenuInflater().inflate(R.menu.menu_contextual,menu);
 
 
 
-    public void modificar ()
-    {
 
-    }
+
 
 
 

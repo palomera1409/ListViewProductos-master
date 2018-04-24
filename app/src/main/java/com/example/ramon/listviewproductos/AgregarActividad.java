@@ -15,18 +15,49 @@ public class AgregarActividad extends AppCompatActivity {
     Spinner spinner;
     EditText nombreprod;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_actividad);
-        String categoria[]={"Electronica","Electronica","Dulceria","Papeleria","Papeleria","Moda","Perfumeria ","Hogar","Electronicos", "Hogar",
-                "Electrodomesticos", "Electrodomesticos","Electronica"};
-        ArrayAdapter<String> adaptador = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,categoria);
-    spinner =(Spinner)findViewById(R.id.spncategoria);
-    spinner.setAdapter(adaptador);
-    nombreprod = (EditText)findViewById(R.id.edtxtnombre);
+
+        Intent i = getIntent();
+      int posicionprincipal = i.getIntExtra("position", 0);
+        String nombre = i.getStringExtra("nombre");
+        String category = i.getStringExtra("categoria");
+
+
+        spinner = (Spinner) findViewById(R.id.spncategoria);
+        nombreprod= (EditText)findViewById(R.id.edtxtnombre);
+        if (posicionprincipal == 0) {
+            String categoria[] = {"Electronica", "Electronica", "Dulceria", "Papeleria", "Papeleria", "Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
+                    "Electrodomesticos", "Electrodomesticos", };
+
+            ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoria);
+            spinner.setAdapter(adaptador);
+
+        }
+
+        else if (posicionprincipal!= 0) {
+
+            nombreprod.setText(nombre);
+
+            String categoria[] = {"Electronica", "Electronica", "Dulceria", "Papeleria", "Papeleria", "Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
+                    "Electrodomesticos", "Electrodomesticos"};
+            ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoria);
+            spinner.setAdapter(adaptador);
+
+        }
+
 
     }
+
+
+
+
+
+
 
 
 
@@ -34,16 +65,15 @@ public class AgregarActividad extends AppCompatActivity {
     public void agregar (View v)
     {
 
+
         Intent  i  = new Intent();
 i.putExtra("nombre",nombreprod.getText().toString());
 i.putExtra("categoria",spinner.getSelectedItem().toString());
+
 setResult(RESULT_OK,i);
 
-        Toast mensaje = Toast.makeText(getApplicationContext(),"Se agregaron correctamente "+nombreprod.getText().toString().toLowerCase(),Toast.LENGTH_LONG);
-        mensaje.setGravity(Gravity.CENTER,32,32);
-        mensaje.setDuration(Toast.LENGTH_LONG);
-        mensaje.show();
-finish();
+
+
 
 
     }
