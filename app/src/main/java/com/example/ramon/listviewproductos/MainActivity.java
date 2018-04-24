@@ -86,14 +86,10 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 777) {
             lproductos.add(data.getStringExtra("nombre"));
             lcategorias.add(data.getStringExtra("categoria"));
-
+            String nombre = data.getStringExtra("nombre");
             LayoutInflater inflar = getLayoutInflater();
-            View layout = inflar.inflate(R.layout.perzonalizacion, null);
-
-
-            //
+            View layout = inflar.inflate (R.layout.perzonalizacion, null);
             Toast mensaje = new Toast(getApplicationContext());
-
             mensaje.setGravity(Gravity.CENTER, 32, 32);
             mensaje.setDuration(Toast.LENGTH_LONG);
             mensaje.setView(layout);
@@ -105,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == 888) {
             int posicion = data.getIntExtra("position", -1);
+
             if (posicion >= 0) {
                 lproductos.set(posicion, data.getStringExtra("nombre"));
                 lcategorias.set(posicion, data.getStringExtra("categoria"));

@@ -16,8 +16,9 @@ public class AgregarActividad extends AppCompatActivity {
 
     Spinner spinner;
     EditText nombreprod;
-    Button guardar;
-  int pos;
+
+
+
 
 
     @Override
@@ -26,31 +27,36 @@ public class AgregarActividad extends AppCompatActivity {
         setContentView(R.layout.activity_agregar_actividad);
 
         Intent i = getIntent();
-        int pos = i.getIntExtra("position", 0);
+
         String nombre = i.getStringExtra("nombre");
         String category = i.getStringExtra("categoria");
-
+       int  pos = i.getIntExtra("position", 0);
 
         spinner = (Spinner) findViewById(R.id.spncategoria);
         nombreprod= (EditText)findViewById(R.id.edtxtnombre);
-        guardar =(Button)findViewById(R.id.btnagregar);
-        if (pos == 0) {
-            String categoria[] = {"Electronica", "Dulceria", "Papeleria", "Papeleria", "Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
-                    "Electrodomesticos", "Electrodomesticos", };
+
+
+        if (pos ==0) {
+            String categoria[] = {"Electronica", "Dulceria", "Papeleria","Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
+                    "Electrodomesticos","primera" };
             ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoria);
             spinner.setAdapter(adaptador);
+
 
         }
 
-        else if (pos != 0) {
+       if (pos >=0) {
+
 
             nombreprod.setText(nombre);
 
-            String categoria[] = {"Electronica", "Dulceria", "Papeleria", "Papeleria", "Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
-                    "Electrodomesticos", "Electrodomesticos"};
-            ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoria);
-            spinner.setAdapter(adaptador);
+            String categoria[] = {"Electronica", "Dulceria", "Papeleria",  "Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
+                    "Electrodomesticos","segunda"};
 
+
+
+           ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoria);
+           spinner.setAdapter(adaptador);
         }
 
 
@@ -75,11 +81,11 @@ public class AgregarActividad extends AppCompatActivity {
 
     public void agregar (View v)
     {
-        Intent f = getIntent();
-        int pos = f.getIntExtra("position", 0);
+        Intent i = getIntent();
+          int pos = i.getIntExtra("position", 0);
 
 
-        Intent  i  = new Intent();
+
 i.putExtra("nombre",nombreprod.getText().toString());
 i.putExtra("categoria",spinner.getSelectedItem().toString());
 i.putExtra("position",pos);

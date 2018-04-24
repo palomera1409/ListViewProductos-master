@@ -22,11 +22,11 @@
     <TextView
         android:id="@+id/textView3"
         android:layout_width="166dp"
-        android:layout_height="45dp"
+        android:layout_height="86dp"
         android:layout_marginBottom="64dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="SE AGREGO EL PRODUCTO: "
+        android:text="EL producto se agrego correctamente"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.615"
