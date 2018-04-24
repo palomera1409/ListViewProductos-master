@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -82,27 +83,55 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-     if (requestCode==777) {
-         lproductos.add(data.getStringExtra("nombre"));
-         lcategorias.add(data.getStringExtra("categoria"));
+        if (requestCode == 777) {
+            lproductos.add(data.getStringExtra("nombre"));
+            lcategorias.add(data.getStringExtra("categoria"));
+
+            LayoutInflater inflar = getLayoutInflater();
+            View layout = inflar.inflate(R.layout.perzonalizacion, null);
 
 
-     }
+            //
+            Toast mensaje = new Toast(getApplicationContext());
 
-     else  if (requestCode==8888)
-     {
-     int pos = data.getIntExtra("pos" ,0);
+            mensaje.setGravity(Gravity.CENTER, 32, 32);
+            mensaje.setDuration(Toast.LENGTH_LONG);
+            mensaje.setView(layout);
+            mensaje.show();
 
-          if (pos>=0)
-          {
-              lproductos.set(pos,data.getStringExtra("nombre"));
-              lcategorias.set(pos,data.getStringExtra("categoria"));
 
-          }
+            actualizarTabla();
+        }
 
-     }
-actualizarTabla();
+        if (requestCode == 888) {
+            int posicion = data.getIntExtra("position", -1);
+            if (posicion >= 0) {
+                lproductos.set(posicion, data.getStringExtra("nombre"));
+                lcategorias.set(posicion, data.getStringExtra("categoria"));
+
+
+                LayoutInflater inflar = getLayoutInflater();
+                View layout = inflar.inflate(R.layout.perzonalizacion, null);
+
+
+                //
+
+                Toast mensaje = Toast.makeText(getApplicationContext(), "SE ACTUALIZO CORRECTAMENTE ", Toast.LENGTH_LONG);
+                mensaje.show();
+            }
+
+
+
+            actualizarTabla();
+        }
     }
+
+
+
+
+
+
+
 
 
     @Override
