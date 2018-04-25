@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 public class AgregarActividad extends AppCompatActivity {
 
     Spinner spinner;
@@ -30,13 +32,13 @@ public class AgregarActividad extends AppCompatActivity {
 
         String nombre = i.getStringExtra("nombre");
         String category = i.getStringExtra("categoria");
-       int  pos = i.getIntExtra("position", 0);
+       int  pos = i.getIntExtra("position", -1);
 
         spinner = (Spinner) findViewById(R.id.spncategoria);
         nombreprod= (EditText)findViewById(R.id.edtxtnombre);
 
 
-        if (pos ==0) {
+        if (pos ==-1) {
             String categoria[] = {"Electronica", "Dulceria", "Papeleria","Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
                     "Electrodomesticos","primera" };
             ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoria);
@@ -50,13 +52,15 @@ public class AgregarActividad extends AppCompatActivity {
 
             nombreprod.setText(nombre);
 
+
             String categoria[] = {"Electronica", "Dulceria", "Papeleria",  "Moda", "Perfumeria ", "Hogar", "Electronicos", "Hogar",
                     "Electrodomesticos","segunda"};
 
 
-
-           ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoria);
+           Arrays.sort(categoria);
+           ArrayAdapter<String> adaptador = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,categoria);
            spinner.setAdapter(adaptador);
+           spinner.setSelection(Arrays.binarySearch(categoria,category));
         }
 
 
